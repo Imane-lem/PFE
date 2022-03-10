@@ -5,7 +5,22 @@
       "ProjectGuid": "be357647-7fd9-4172-9dfe-c5e29ad647bf",
       "DisplayName": "PFEAplicationApi",
       "ColorIndex": 0
+    },
+    "2c1e777c-5ad6-427d-99d5-acfcf714ff9f": {
+      "ProjectGuid": "2c1e777c-5ad6-427d-99d5-acfcf714ff9f",
+      "DisplayName": "PFEDal",
+      "ColorIndex": 1
+    },
+    "19d6a491-a8ee-4477-aeb6-a8e18b35d031": {
+      "ProjectGuid": "19d6a491-a8ee-4477-aeb6-a8e18b35d031",
+      "DisplayName": "PFEServices",
+      "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 3
 }
