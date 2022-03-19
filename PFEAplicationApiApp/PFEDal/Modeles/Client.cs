@@ -10,6 +10,10 @@ namespace PFEDal.Modeles
 {
     public class Client
     {
+        public Client()
+        {
+            this.Commande_Sorties = new HashSet<Commande_Sortie>();
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ClientId { get; set; }
@@ -18,6 +22,7 @@ namespace PFEDal.Modeles
         public int ClientTel { get; set; }
         public string ClientEmail { get; set; }
         public int ClientFax { get; set; }
+        public virtual ICollection<Commande_Sortie> Commande_Sorties { get; set; }
 
     }
 }

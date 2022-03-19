@@ -16,9 +16,30 @@ export class AdministrationService {
      }
      addUser(user:Utilisateur):Observable<Utilisateur>{
           let host=environment.host;
-          return this.http.post<Utilisateur>(host+"/AdminControler/AddUser",+user)
+          return this.http.post<Utilisateur>(host+"/AdminControler/AddUser",user)
 
      }
+     deletUser(user:Utilisateur):Observable<void>{
+          let host=environment.host;
+          return this.http.delete<void>(host+"/AdminControler/Delet?login="+user.login)
+
+     }
+     searchUser(keyword:string):Observable<Utilisateur[]>{
+          let host=environment.host;
+          return this.http.get<Utilisateur[]>(host+"/AdminControler/search?name="+keyword)
+
+     }
+     apdateUser(user:Utilisateur):Observable<Utilisateur>{
+          let host=environment.host;
+          return this.http.put<Utilisateur>(host+"/AdminControler/UpdateUser?login="+user.login,user)
+
+     }
+     getUserbyid(login:string):Observable<Utilisateur>{
+          let host=environment.host;
+          return this.http.get<Utilisateur>(host+"/AdminControler/search?name="+login)
+     }
+    
+
      
 
 

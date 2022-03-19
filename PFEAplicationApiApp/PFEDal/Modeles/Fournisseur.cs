@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace PFEDal.Modeles
 {
+    
     public class Fournisseur
     {
+        public Fournisseur()
+        {
+            this.Command_Entrees = new HashSet<Command_Entree>();
+
+
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id_f { get; set; }
@@ -18,6 +26,8 @@ namespace PFEDal.Modeles
         public int Tel_f { get; set; }
         public int Fax_f { get; set; }
         public string Email_f { get; set; }
+
+        public virtual ICollection<Command_Entree> Command_Entrees { get; set;}
 
     }
 }

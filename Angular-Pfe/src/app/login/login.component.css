@@ -9,3 +9,10 @@
     transform: translate(-50%,-50%);
     background-color: rgb(180 195 183);
 }
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+

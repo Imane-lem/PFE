@@ -10,10 +10,13 @@ namespace PFEDal.Modeles
 {
     public class Lig_Com_Entree
     {
+        
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id_Bomc { get; set; }
         public int QTE { get; set; }
+
+       
 
     }
 }

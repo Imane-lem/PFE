@@ -1,8 +1,8 @@
 <app-home></app-home>
+
 <div class="container" *ngIf="userformgroup">
-   
-    <form [formGroup]="userformgroup" >
-        <div class="form-group">
+    <form  [formGroup]="userformgroup">
+       <div class="form-group">
             <label for="">Login</label>
             <input type="text" class="form-control" formControlName="login">
         </div>
@@ -46,8 +46,7 @@
             <label for="">tel</label>
             <input type="text" class="form-control" formControlName="tel">
         </div>
-        <button type="submit" class="btn btn-primary" (click)="onSave()" >Submit</button>
-    </form>
- 
+        <button type="submit" class="btn btn-primary" (click)="update()" >Submit</button>
 
+    </form>
 </div>

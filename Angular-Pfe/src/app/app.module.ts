@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { AddUserComponent } from './administration/add-user/add-user.component';
+import { EditUserComponent } from './administration/edit-user/edit-user.component';
 
 
 
@@ -21,6 +22,7 @@ import { AddUserComponent } from './administration/add-user/add-user.component';
     HomeComponent,
     AdministrationComponent,
     AddUserComponent,
+    EditUserComponent,
     
    
    

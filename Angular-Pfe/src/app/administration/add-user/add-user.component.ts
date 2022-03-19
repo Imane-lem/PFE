@@ -19,7 +19,7 @@ export class AddUserComponent implements OnInit {
       name:["",Validators.required],
       prenom:["",Validators.required],
       date_naiss:["",Validators.required],
-      sex:["",Validators.required],
+      sexe:["",Validators.required],
       adress:["",Validators.required],
       service:["",Validators.required],
       tel:["",Validators.required]
@@ -27,6 +27,7 @@ export class AddUserComponent implements OnInit {
   }
   onSave(){
     this.adminservice.addUser(this.userformgroup.value).subscribe(data=>{
+     console.log(data);
       alert("l'utilisateurs a ajouter");
     })
 

@@ -51,6 +51,24 @@ namespace PFEAplicationApi.Controllers
                 return Ok(result);
 
         }
+        [HttpGet]
+        [Route("getbyid")]
+        public async Task<ActionResult<List<UserDto>>> GetuseById(string login)
+        {
+            var pro = await _AdminService.GetUserById(login);
+            if (pro == null)
+                return null;
+            return Ok(pro);
+        }
+        [HttpGet]
+        [Route("search")]
+        public async Task<ActionResult<List<UserDto>>> SearchUser(string name)
+        {
+            var result=await _AdminService.Search(name);
+            if (result == null)
+                return null;
+            return Ok(result);
+        }
 
 
 

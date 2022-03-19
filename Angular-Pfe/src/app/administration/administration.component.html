@@ -11,9 +11,9 @@
       
       <div class="navbar-nav ms-auto">
             <li class="nav-item">
-              <form  class="form-inline" >
+              <form #f="ngForm" (ngSubmit)="onSearch(f.value)"  class="form-inline" >
                    
-                      <input class="form-control ml-2" type="text"  ngModel name="keyword">
+                      <input class="form-control ml-2" type="text"   ngModel name="keyword">
                       <button class="btn btn-sm btn-outline-success ml-2 " >
                           <span class="fa fa-search"></span>
                       </button>
@@ -24,42 +24,57 @@
           </div> 
       </ul>
   </nav>
-  <div class="container" *ngIf="User">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Prenom</th>
-        <th>Date de naissance</th>
-        <th>Sex</th>
-        <th>Adress</th>
-        <th>Service</th>
-        <th colspan="2">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let u of User">
-        <td>{{u.name}}</td>
-        <td>{{u.prenom}}</td>
-        <td>{{u.date_Naiss}}</td>
-        <td>{{u.sexe}}</td>
-        <td>{{u.adress}}</td>
-        <td>{{u.service}}</td>
-        <td>
-          <button class="btn btn-danger" >
-              <span class="fa fa-trash-o"></span>
-          </button>
-      </td>
+  <ng-container *ngIf="(User$ |async) as result" [ngSwitch]="result.datastate">
+
+  <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+    Loading...
+  </ng-container>
+
+  <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+   <div class="alert-danger">
+     {{result.errorMessage}}
+   </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+   <table class="table">
+    <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Prenom</th>
+      <th>Date de naissance</th>
+      <th>Sex</th>
+      <th>Adress</th>
+      <th>Service</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of result.data ">
+      <td>{{u.name}}</td>
+      <td>{{u.prenom}}</td>
+      <td>{{u.date_Naiss}}</td>
+      <td>{{u.sexe}}</td>
+      <td>{{u.adress}}</td>
+      <td>{{u.service}}</td>
       <td>
-          <button class="btn btn-danger" >
-              <span class="fa fa-edit"></span>
-          </button>
-      </td>
+        <button class="btn btn-danger" (click)="onDelet(u)">
+            <span class="fa fa-trash-o"></span>
+        </button>
+    </td>
+    <td>
+        <button class="btn btn-danger" (click)="onUpdate(u)" >
+            <span class="fa fa-edit"></span>
+        </button>
+    </td>
 
-      </tr>
-    </tbody>
+    </tr>
+  </tbody>
 
-    </table>
+  </table>
 
-  </div>
+  </ng-container>
+
+  </ng-container>
+ 
 

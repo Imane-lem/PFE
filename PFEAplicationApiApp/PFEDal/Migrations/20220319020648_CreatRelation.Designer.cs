@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PFEDal.Modeles;
 
@@ -11,9 +12,10 @@ using PFEDal.Modeles;
 namespace PFEDal.Migrations
 {
     [DbContext(typeof(PfeDbContext))]
-    partial class PfeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220319020648_CreatRelation")]
+    partial class CreatRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

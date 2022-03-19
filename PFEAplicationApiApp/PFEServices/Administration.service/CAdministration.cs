@@ -23,14 +23,13 @@ namespace PFEServices.Administration.service
             {
                 Login=UserDto.Login,
                 Password = UserDto.Password,
-                Service=UserDto.Service,
                 Name = UserDto.Name,
-                Prenom=UserDto.Prenom,
-                Adress=UserDto.Adress,
+                Prenom =UserDto.Prenom,
+                Date_Naiss = UserDto.Date_Naiss,
+                Sexe = UserDto.Sexe,
+                Service = UserDto.Service,
+                Adress =UserDto.Adress,
                 Tel=UserDto.Tel,
-                Sexe=UserDto.Sexe,
-                Date_Naiss=UserDto.Date_Naiss,
-
             };
              await _pfeContext.Utilisateurs.AddAsync(user);
             _pfeContext.SaveChanges();
@@ -39,14 +38,15 @@ namespace PFEServices.Administration.service
             
         }
 
-        public Task<List<UserDto>> DeleteUser(string login)
+        public  List<UserDto> DeleteUser(string login)
         {
             var user=_pfeContext.Utilisateurs.FirstOrDefault(u => u.Login == login);
             if (user == null)
                 return null;
             _pfeContext.Utilisateurs.Remove(user);
             _pfeContext.SaveChanges();
-            return null;
+
+            return GetUsers();
         }
 
         public async Task<UserDto> GetUserById(string login)
@@ -54,7 +54,7 @@ namespace PFEServices.Administration.service
           var user=_pfeContext.Utilisateurs.FirstOrDefault(x => x.Login == login);
             var result = new UserDto()
             {
-                Login = login,
+                Login = user.Login,
                 Password=user.Password,
                 Name = user.Name,
                 Prenom=user.Prenom,
@@ -81,6 +81,8 @@ namespace PFEServices.Administration.service
                 Sexe = u.Sexe,
                 Service = u.Service,
                 Adress = u.Adress,
+                Tel = u.Tel
+
 
 
             });
@@ -92,19 +94,47 @@ namespace PFEServices.Administration.service
             var user=_pfeContext.Utilisateurs.FirstOrDefault(u => login == u.Login);
             if (user == null)
                 return null;
-            user.Login = login;
-            user.Password = UserDto.Password;
-            user.Name = UserDto.Name;
-            user.Prenom= UserDto.Prenom;
-            user.Adress= UserDto.Adress;
-            user.Service = UserDto.Service;
-            user.Tel= UserDto.Tel;
-            user.Sexe= UserDto.Sexe;
+
+                user.Login = login;
+                user.Password = UserDto.Password;
+                user.Name = UserDto.Name;
+                user.Prenom = UserDto.Prenom;
+                user.Adress = UserDto.Adress;
+                user.Service = UserDto.Service;
+                user.Tel = UserDto.Tel;
+                user.Sexe = UserDto.Sexe;
+            
             _pfeContext.Utilisateurs.Update(user);
              _pfeContext.SaveChanges();
             return UserDto;
 
             
         }
+        public async Task<List<UserDto>> Search(string name)
+        {
+            IQueryable<Utilisateur> query =_pfeContext.Utilisateurs;
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query=query.Where(u=>u.Name.Contains(name)||u.Prenom.Contains(name));
+            }
+
+            
+
+            var result = query.Select(u => new UserDto()
+            {
+                Prenom = u.Prenom,
+                Name = u.Name,
+                Date_Naiss=u.Date_Naiss,
+                Sexe=u.Sexe,
+                Service=u.Service,
+                Tel=u.Tel,
+                Adress=u.Adress
+            });
+            return  result.ToList();
+
+            
+        }
     }
 }
+

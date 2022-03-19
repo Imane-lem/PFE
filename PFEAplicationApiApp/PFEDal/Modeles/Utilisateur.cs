@@ -10,8 +10,15 @@ namespace PFEDal.Modeles
   
         public class Utilisateur
         {
-            [Key]
+        public Utilisateur()
+        {
+            this.Command_Entrees = new HashSet<Command_Entree>();
 
+            this.Commande_Sorties = new HashSet<Commande_Sortie>();
+
+        }
+            [Key]
+            public int UderId { get; set; }
             public string Login { get; set; }
             public string Password { get; set; }
             public string Name { get; set; }
@@ -21,7 +28,9 @@ namespace PFEDal.Modeles
             public string Service { get; set; }
             public string Adress { get; set; }
             public int Tel { get; set; }
-            
+            public virtual ICollection<Command_Entree> Command_Entrees { get; set; }
+            public virtual ICollection<Commande_Sortie> Commande_Sorties { get; set; }
+
     }
     
 }
