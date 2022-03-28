@@ -11,6 +11,12 @@ import { HomeComponent } from './home/home.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { AddUserComponent } from './administration/add-user/add-user.component';
 import { EditUserComponent } from './administration/edit-user/edit-user.component';
+import { FournisseurComponent } from './Fournisseur/fournisseur/fournisseur.component';
+import { AddfourComponent } from './Fournisseur/addfour/addfour.component';
+import { EditfourniComponent } from './Fournisseur/editfourni/editfourni.component';
+import { ClientComponent } from './Client/client/client.component';
+import { AddClientComponent } from './Client/add-client/add-client.component';
+import { EditClientComponent } from './Client/edit-client/edit-client.component';
 
 
 
@@ -23,6 +29,12 @@ import { EditUserComponent } from './administration/edit-user/edit-user.componen
     AdministrationComponent,
     AddUserComponent,
     EditUserComponent,
+    FournisseurComponent,
+    AddfourComponent,
+    EditfourniComponent,
+    ClientComponent,
+    AddClientComponent,
+    EditClientComponent,
     
    
    

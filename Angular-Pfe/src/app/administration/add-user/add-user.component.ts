@@ -13,6 +13,7 @@ export class AddUserComponent implements OnInit {
   constructor( private adminservice:AdministrationService,private fb:FormBuilder) { }
 
   ngOnInit(): void {
+
     this.userformgroup=this.fb.group({
       login:["",Validators.required],
       password:["",Validators.required],

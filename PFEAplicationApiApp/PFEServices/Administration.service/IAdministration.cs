@@ -11,9 +11,9 @@ namespace PFEServices.Administration.service
     {
         List<UserDto> GetUsers();
         Task<UserDto> AddUser(UserDto UserDto);
-        Task<UserDto> UpdateUser(string login, UserDto UserDto);
-        List<UserDto> DeleteUser(string login);
-        Task<UserDto> GetUserById(string login);
+        Task<UserDto> UpdateUser(int id, UserDto UserDto);
+        List<UserDto> DeleteUser(int id);
+        Task<UserDto> GetUserById(int id);
         Task<List<UserDto>> Search(string name);
 
     }

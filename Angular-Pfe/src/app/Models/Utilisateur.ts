@@ -1,6 +1,7 @@
 
 
 export interface Utilisateur{
+    uderId:number;
     login:string;
     password:string;
     name:string;

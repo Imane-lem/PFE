@@ -9,18 +9,21 @@ import { AdministrationService } from 'src/app/Services/Administration.service';
   styleUrls: ['./edit-user.component.css']
 })
 export class EditUserComponent implements OnInit {
-  Userid!:string;
+  Userid!:number;
   userformgroup!:FormGroup;
 
   constructor( private adminservice:AdministrationService,private fb:FormBuilder,private activateroot:ActivatedRoute) 
   {
-   this.Userid=this.activateroot.snapshot.params['login'];
+   this.Userid=activateroot.snapshot.params['uderId'];
    console.log(this.Userid);
    }
 
   ngOnInit(): void {
     this.adminservice.getUserbyid(this.Userid).subscribe(user=>{
+      
+      console.log("user");
       this.userformgroup=this.fb.group({
+      uderId:[user.uderId,Validators.required],
       login:[user.login,Validators.required],
       password:[user.password,Validators.required],
       name:[user.name,Validators.required],

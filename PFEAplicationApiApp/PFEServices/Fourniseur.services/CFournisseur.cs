@@ -23,7 +23,7 @@ namespace PFEServices.Fourniseur.services
         {
             var fournisseur = new Fournisseur()
             {
-
+               
                Name_f=fournisseurDto.Name_f,
                Adress_f=fournisseurDto.Adress_f,
                Fax_f=fournisseurDto.Fax_f,
@@ -36,14 +36,15 @@ namespace PFEServices.Fourniseur.services
             return fournisseurDto;
         }
 
-        public Task<List<FournisseurDto>> DeleteFourni(int id)
+        public List<FournisseurDto> DeleteFourni(int id)
         {
-            var fournisseur=_pfeContext.fournisseurs.First(x=>x.Id_f==id);
+            var fournisseur=_pfeContext.fournisseurs.FirstOrDefault(x=>x.Id_f==id);
             if (fournisseur == null)
                 return null;
             _pfeContext.fournisseurs.Remove(fournisseur);
             _pfeContext.SaveChanges();
-            return null;
+
+            return  GetFourni();
         }
 
         public List<FournisseurDto> GetFourni()
@@ -94,6 +95,26 @@ namespace PFEServices.Fourniseur.services
             _pfeContext.SaveChanges();
             return fournisseurDto;
             
+        }
+
+        public async Task<List<FournisseurDto>> Search(string name)
+        {
+            IQueryable<Fournisseur> query = _pfeContext.fournisseurs;
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(u => u.Name_f.Contains(name) );
+            }
+            var result = query.Select(f => new FournisseurDto()
+            {
+                Id_f=f.Id_f,
+                Name_f = f.Name_f,
+                Adress_f=f.Adress_f,
+                Email_f=f.Email_f,
+                Tel_f=f.Tel_f,
+                Fax_f=f.Fax_f,
+
+            });
+            return result.ToList();
         }
     }
 }

@@ -1,0 +1,38 @@
+<app-home></app-home>
+<div class="container" *ngIf="fourniformgroup">
+    <form [formGroup]="fourniformgroup" >
+        <div class="form-group">
+            <label for="">ID</label>
+            <input type="text" class="form-control" formControlName="id_f">
+        </div>
+   
+      <div class="form-group">
+          <label for="">Nom Fournisseur</label>
+          <input type="text" class="form-control" formControlName="name_f">
+      </div>
+      <div class="form-group">
+        <label for="">Adress Fournisseur</label>
+        <input type="text" class="form-control" formControlName="adress_f">
+    </div>
+    <div class="form-group">
+      <label for="">Telephone Fournisseur</label>
+      <input type="text" class="form-control" formControlName="tel_f">
+  </div>
+  <div class="form-group">
+    <label for="">Fax Fournisseur</label>
+    <input type="text" class="form-control" formControlName="fax_f">
+  </div>
+  
+  <div class="form-group">
+    <label for="">Email Fournisseur</label>
+    <input type="email" class="form-control" formControlName="email_f">
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="UpdateF()" >Submit</button>
+  
+    
+      
+  
+    </form>
+  
+  </div>
+

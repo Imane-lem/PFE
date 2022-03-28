@@ -45,12 +45,31 @@ namespace PFEAplicationApi.Controllers
         [Route("Delet")]
         public async Task<ActionResult<ClientDto>> DeleteClient(int id)
         {
-            var result = await _clientService.DeleteClient(id);
+            var result =  _clientService.DeleteClient(id);
             if (result == null)
                 return NotFound();
             else
                 return Ok(result);
 
+        }
+        [HttpGet]
+        [Route("search")]
+        public async Task<ActionResult<List<ClientDto>>> SearchClient(string name)
+        {
+            var result = await _clientService.Search(name);
+            if (result == null)
+                return NotFound();
+            else
+                return Ok(result);
+        }
+        [HttpGet]
+        [Route("getById")]
+        public async Task<ActionResult<List<ClientDto>>> GetClientById(int id)
+        {
+            var result = await _clientService.GetClientById(id);
+            if (result == null)
+                return null;
+            return Ok(result);
         }
 
 

@@ -45,12 +45,31 @@ namespace PFEAplicationApi.Controllers
         [Route("Delet")]
         public async Task<ActionResult<FournisseurDto>> DeletFournisseur(int id)
         {
-            var result = await _fournisseurService.DeleteFourni(id);
+            var result =  _fournisseurService.DeleteFourni(id);
             if (result == null)
                 return NotFound();
             else
                 return Ok(result);
 
+        }
+        [HttpGet] 
+        [Route("getById")]
+        public async Task<ActionResult<List<FournisseurDto>>> GetFourniById(int id)
+        {
+            var result =await _fournisseurService.GetFourniById(id);
+            if (result == null)
+                return null;
+            return Ok(result);
+        }
+        [HttpGet]
+        [Route("search")]
+        public async Task<ActionResult<List<FournisseurDto>>> SearchFourni(string name)
+        {
+            var result = await _fournisseurService.Search(name);
+            if (result == null)
+                return NotFound();
+            else
+                return Ok(result);
         }
 
 

@@ -1,0 +1,80 @@
+<app-home></app-home>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+ 
+    <ul class=" navbar navbar-nav">
+      <li  class="nav-item">
+        <button class="btn btn-sm btn-outline-success ml-2" (click)=" OnGetALLFourni()">ALLFournisseur</button>
+      </li>
+      <li class="nav-item" >
+          <button class="btn btn-sm btn-outline-success ml-2" routerLink="/addfourni" >AddFournisseur</button>
+      </li>
+      
+      <div class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <form #f="ngForm" (ngSubmit)="onSearch(f.value)" class="form-inline"  >
+                   
+                      <input class="form-control ml-2" type="text"   ngModel name="keyword">
+                      <button class="btn btn-sm btn-outline-success ml-2 " >
+                          <span class="fa fa-search"></span>
+                      </button>
+                    
+                </form>
+            </li>
+  
+          </div> 
+      </ul>
+  </nav>
+  <ng-container *ngIf="(fourni$ |async) as result" [ngSwitch]="result.datastate">
+
+    <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+      Loading...
+    </ng-container>
+  
+    <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+     <div class="alert-danger">
+       {{result.errorMessage}}
+     </div>
+    </ng-container>
+  
+    <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+     <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Adress</th>
+        <th>Telephone</th>
+        <th>Email</th>
+        <th colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let f of result.data ">
+        
+        <td>{{f.id_f}}</td>
+        <td>{{f.name_f }}</td>
+        <td>{{f. adress_f}}</td>
+        <td>{{f.tel_f}}</td>
+        <td>{{f.email_f}}</td>
+       
+        <td>
+          <button class="btn btn-danger" (click)="onDelet(f)">
+              <span class="fa fa-trash-o"></span>
+          </button>
+      </td>
+      <td>
+          <button class="btn btn-danger" (click)="onUpdate(f)" >
+              <span class="fa fa-edit"></span>
+          </button>
+      </td>
+  
+      </tr>
+    </tbody>
+  
+    </table>
+  
+    </ng-container>
+  
+    </ng-container>
+
+

@@ -44,6 +44,8 @@ namespace PFEServices.Client.services
                 
 
             };
+            await _pfeContext.clients.AddAsync(client);
+            _pfeContext.SaveChanges();
             return clientDto;
          
            
@@ -62,19 +64,19 @@ namespace PFEServices.Client.services
             client.ClientTel = clientDto.ClientTel;
             client.ClientEmail = clientDto.ClientEmail;
             client.ClientFax = clientDto.ClientFax;
-            _pfeContext.clients.Add(client);
+            _pfeContext.clients.Update(client);
             _pfeContext.SaveChanges();
             return clientDto;
         }
 
-        public async Task<List<ClientDto>> DeleteClient(int id)
+        public List<ClientDto> DeleteClient(int id)
         {
             var client = _pfeContext.clients.FirstOrDefault(u => u.ClientId == id);
             if (client == null)
                 return null;
              _pfeContext.clients.Remove(client);
              _pfeContext.SaveChanges();
-            return null;
+            return GetClients();
 
 
 
@@ -99,6 +101,28 @@ namespace PFEServices.Client.services
             return result;
         }
 
-     
+        public async Task<List<ClientDto>> Search(string name)
+        {
+            IQueryable<PFEDal.Modeles.Client> query = _pfeContext.clients;
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(u => u.ClientName.Contains(name) );
+            }
+            var result = query.Select(u => new ClientDto()
+            {
+                ClientName = u.ClientName,
+                ClientId = u.ClientId,
+                ClientAdress=u.ClientAdress,
+                ClientEmail=u.ClientEmail,
+                ClientTel=u.ClientTel,
+                ClientFax=u.ClientFax,
+
+            });
+            return result.ToList();
+
+
+        }
+
+       
     }
 }

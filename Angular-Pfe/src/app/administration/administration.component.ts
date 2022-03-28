@@ -34,6 +34,7 @@ export class AdministrationComponent implements OnInit {
    this.User$=
     this.adminservice.getAllUser().pipe(
       map(data=>{ 
+      console.log(data);
         return( {datastate:DataStateEnum.LOADED,data:data })}),
       startWith({datastate:DataStateEnum.LOADING}),
       catchError(err=>of({datastate:DataStateEnum.ERROR,errMessage:err.message}))
@@ -60,7 +61,7 @@ export class AdministrationComponent implements OnInit {
 
 }
  onUpdate(u:Utilisateur){
-   this.router.navigateByUrl("/edituser/"+u.login);
+   this.router.navigateByUrl("/edituser/"+u.uderId);
 
 }
 

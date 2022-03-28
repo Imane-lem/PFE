@@ -32,9 +32,9 @@ namespace PFEAplicationApi.Controllers
         }
         [HttpPut]
         [Route("UpdateUser")]
-        public async Task<ActionResult<UserDto>> UpdateUser( string login,[FromBody]UserDto user)
+        public async Task<ActionResult<UserDto>> UpdateUser( int id,[FromBody]UserDto user)
         {
-            var result= await _AdminService.UpdateUser(login,user);
+            var result= await _AdminService.UpdateUser(id,user);
             if (result == null)
                 return BadRequest(result);
             else
@@ -42,9 +42,9 @@ namespace PFEAplicationApi.Controllers
         }
         [HttpDelete]
         [Route("Delet")]
-        public async Task<ActionResult<UserDto>> DeletUser( string login)
+        public async Task<ActionResult<UserDto>> DeletUser( int id)
         {
-            var result = _AdminService.DeleteUser(login);
+            var result = _AdminService.DeleteUser(id);
             if (result == null)
                 return NotFound();
             else
@@ -53,9 +53,9 @@ namespace PFEAplicationApi.Controllers
         }
         [HttpGet]
         [Route("getbyid")]
-        public async Task<ActionResult<List<UserDto>>> GetuseById(string login)
+        public async Task<ActionResult<List<UserDto>>> GetuseById(int id)
         {
-            var pro = await _AdminService.GetUserById(login);
+            var pro = await _AdminService.GetUserById(id);
             if (pro == null)
                 return null;
             return Ok(pro);

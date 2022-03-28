@@ -13,6 +13,7 @@ export class AdministrationService {
      getAllUser():Observable< Utilisateur[]>{
           let host=environment.host;
          return this.http.get< Utilisateur[]>(host+"/AdminControler/GetUsers")
+        
      }
      addUser(user:Utilisateur):Observable<Utilisateur>{
           let host=environment.host;
@@ -21,7 +22,7 @@ export class AdministrationService {
      }
      deletUser(user:Utilisateur):Observable<void>{
           let host=environment.host;
-          return this.http.delete<void>(host+"/AdminControler/Delet?login="+user.login)
+          return this.http.delete<void>(host+"/AdminControler/Delet?id="+user.uderId)
 
      }
      searchUser(keyword:string):Observable<Utilisateur[]>{
@@ -31,12 +32,13 @@ export class AdministrationService {
      }
      apdateUser(user:Utilisateur):Observable<Utilisateur>{
           let host=environment.host;
-          return this.http.put<Utilisateur>(host+"/AdminControler/UpdateUser?login="+user.login,user)
+          console.log(user);
+          return this.http.put<Utilisateur>(host+"/AdminControler/UpdateUser?id="+user.uderId,user)
 
      }
-     getUserbyid(login:string):Observable<Utilisateur>{
+     getUserbyid(id:number):Observable<Utilisateur>{
           let host=environment.host;
-          return this.http.get<Utilisateur>(host+"/AdminControler/search?name="+login)
+          return this.http.get<Utilisateur>(host+"/AdminControler/getbyid?id="+id)
      }
     
 

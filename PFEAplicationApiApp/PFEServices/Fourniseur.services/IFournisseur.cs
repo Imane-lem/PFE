@@ -12,7 +12,8 @@ namespace PFEServices.Fourniseur.services
         List<FournisseurDto> GetFourni();
         Task<FournisseurDto> AddFourni(FournisseurDto fournisseurDto);
         Task<FournisseurDto> UpdateFourni(int id, FournisseurDto fournisseurDto);
-        Task<List<FournisseurDto>> DeleteFourni(int id);
+        List<FournisseurDto> DeleteFourni(int id);
         Task<FournisseurDto> GetFourniById(int id);
+        Task<List<FournisseurDto>> Search(string name);
     }
 }

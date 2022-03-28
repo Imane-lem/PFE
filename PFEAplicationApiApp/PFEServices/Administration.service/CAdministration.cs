@@ -38,9 +38,9 @@ namespace PFEServices.Administration.service
             
         }
 
-        public  List<UserDto> DeleteUser(string login)
+        public  List<UserDto> DeleteUser(int id)
         {
-            var user=_pfeContext.Utilisateurs.FirstOrDefault(u => u.Login == login);
+            var user=_pfeContext.Utilisateurs.FirstOrDefault(u => u.UderId == id);
             if (user == null)
                 return null;
             _pfeContext.Utilisateurs.Remove(user);
@@ -49,11 +49,12 @@ namespace PFEServices.Administration.service
             return GetUsers();
         }
 
-        public async Task<UserDto> GetUserById(string login)
+        public async Task<UserDto> GetUserById(int id)
         {
-          var user=_pfeContext.Utilisateurs.FirstOrDefault(x => x.Login == login);
+          var user=_pfeContext.Utilisateurs.FirstOrDefault(x => x.UderId == id);
             var result = new UserDto()
             {
+                UderId = user.UderId,
                 Login = user.Login,
                 Password=user.Password,
                 Name = user.Name,
@@ -73,6 +74,7 @@ namespace PFEServices.Administration.service
             var User = _pfeContext.Utilisateurs.ToList();
             var result = User.Select(u => new UserDto()
             {
+                UderId=u.UderId,
                 Login = u.Login,
                 Password = u.Password,
                 Name = u.Name,
@@ -89,13 +91,13 @@ namespace PFEServices.Administration.service
             return result.ToList();
         }
 
-        public async Task<UserDto> UpdateUser(string login, UserDto UserDto)
+        public async Task<UserDto> UpdateUser(int id, UserDto UserDto)
         {
-            var user=_pfeContext.Utilisateurs.FirstOrDefault(u => login == u.Login);
+            var user=_pfeContext.Utilisateurs.FirstOrDefault(u => u.UderId==id);
             if (user == null)
                 return null;
 
-                user.Login = login;
+                user.Login = UserDto.Login;
                 user.Password = UserDto.Password;
                 user.Name = UserDto.Name;
                 user.Prenom = UserDto.Prenom;
@@ -118,8 +120,6 @@ namespace PFEServices.Administration.service
             {
                 query=query.Where(u=>u.Name.Contains(name)||u.Prenom.Contains(name));
             }
-
-            
 
             var result = query.Select(u => new UserDto()
             {

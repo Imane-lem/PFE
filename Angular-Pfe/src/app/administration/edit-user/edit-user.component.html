@@ -2,6 +2,10 @@
 
 <div class="container" *ngIf="userformgroup">
     <form  [formGroup]="userformgroup">
+        <div class="form-group">
+            <label for="">ID</label>
+            <input type="text" class="form-control" formControlName="uderId">
+        </div>
        <div class="form-group">
             <label for="">Login</label>
             <input type="text" class="form-control" formControlName="login">

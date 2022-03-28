@@ -40,6 +40,7 @@
    <table class="table">
     <thead>
     <tr>
+      <th>ID</th>
       <th>Nom</th>
       <th>Prenom</th>
       <th>Date de naissance</th>
@@ -51,6 +52,8 @@
   </thead>
   <tbody>
     <tr *ngFor="let u of result.data ">
+      
+      <td>{{u.uderId}}</td>
       <td>{{u.name}}</td>
       <td>{{u.prenom}}</td>
       <td>{{u.date_Naiss}}</td>
